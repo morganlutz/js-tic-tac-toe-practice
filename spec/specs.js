@@ -24,5 +24,18 @@ describe('Space', function() {
     expect(testSpace.getMark()).to.equal(testPlayer.mark);
  });
 
-
 });
+
+describe('Board', function() {
+  //  it("return correct x corrdinate", function() {
+  //     var testSpace = new Space(1,2);
+  //     expect(testSpace.xCoordinate).to.equal(1);
+   });
+ });
+
+ // describe('Game', function() {
+ //    it("return correct x corrdinate", function() {
+ //       var testSpace = new Space(1,2);
+ //       expect(testSpace.xCoordinate).to.equal(1);
+ //    });
+ //  });

@@ -30,26 +30,37 @@ Space.prototype.getMark = function() {
   return this.markedBy;
 }
 
-function Board(numberOfSquares) {
-  //takes number of squares and gets square root
-  //uses square root to decide how many spaces in each row
-  //run function that creates the correct number of spaces
-  //assign spaces to html elements???
+function createBoard(numberOfSquares) {
+  debugger;
+  this.board = [];
+
+  var rowsOrColumns = Math.sqrt(numberOfSquares);
+
+  for (var rowIndex = 0; rowIndex < rowsOrColumns; rowIndex++) {
+    var row = [];
+    for (var colIndex = 0; colIndex < rowsOrColumns; colIndex++) {
+    row.push(new Space(rowIndex, colIndex));
+  }
+  this.board.push(row);
+}
+  return board;
 }
 
-Board.prototype.findSpace = function() {
-  //?? what would we use this for
-}
 
-Board.prototype.checkIfWinning = function() {
 
-}
-
-function Game() {
-  //creates 2 players
-  //initializes board
-
-}
+// Board.prototype.findSpace = function() {
+//   //?? what would we use this for
+// }
+//
+// Board.prototype.checkIfWinning = function() {
+//
+// }
+//
+// function Game() {
+//   //creates 2 players
+//   //initializes board
+//
+// }
 
 
 
