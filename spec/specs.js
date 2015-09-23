@@ -26,10 +26,21 @@ describe('Space', function() {
 
 });
 
-describe('Board', function() {
-  //  it("return correct x corrdinate", function() {
-  //     var testSpace = new Space(1,2);
-  //     expect(testSpace.xCoordinate).to.equal(1);
+describe('createBoard', function() {
+  it("initializes board", function() {
+    var newBoard = new createBoard(9);
+    var expectedBoardArray = [
+    [new Space(0,0), new Space(0,1), new Space(0, 2)],
+    [new Space(1,0), new Space(1,1), new Space(1, 2)],
+    [new Space(2,0), new Space(2,1), new Space(2, 2)]
+  ];
+  expect(newBoard.board).to.eql(expectedBoardArray);
+  });
+
+
+   it("returns space by coordinates", function() {
+      var newBoard = new createBoard(9);
+      expect(newBoard.findSpace(0,1)).to.eql(new Space(0,1));
    });
  });
 

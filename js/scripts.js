@@ -8,64 +8,66 @@ function Space(xCoordinate, yCoordinate) {
   this.markedBy = "";
 }
 
-Space.prototype.checkIfEmpty = function() {
-//debugger;
-  if(this.markedBy === "") {
-    return true;
-  } else {
-    return false;
+  Space.prototype.checkIfEmpty = function() {
+    if(this.markedBy === "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Space.prototype.markByPlayer = function(player) {
+    if(this.checkIfEmpty()) {
+      this.markedBy = player.mark;
+    } else {
+
+    }
+  }
+
+  Space.prototype.getMark = function() {
+    return this.markedBy;
+  }
+
+function createBoard(numberOfSpaces) {
+    debugger;
+    this.board = [];
+
+    var rowsOrColumns = Math.sqrt(numberOfSpaces);
+
+    for (var rowIndex = 0; rowIndex < rowsOrColumns; rowIndex++) {
+      var row = [];
+      for (var colIndex = 0; colIndex < rowsOrColumns; colIndex++) {
+      row.push(new Space(rowIndex, colIndex));
+    }
+    this.board.push(row);
   }
 }
 
-Space.prototype.markByPlayer = function(player) {
-  //debugger;
-  if(this.checkIfEmpty()) {
-    this.markedBy = player.mark;
-  } else {
-
+  createBoard.prototype.findSpace = function(xCoordinate, yCoordinate) {
+    return this.board[xCoordinate][yCoordinate];
   }
-}
 
-Space.prototype.getMark = function() {
-  return this.markedBy;
-}
 
-function createBoard(numberOfSquares) {
-  debugger;
-  this.board = [];
-
-  var rowsOrColumns = Math.sqrt(numberOfSquares);
-
-  for (var rowIndex = 0; rowIndex < rowsOrColumns; rowIndex++) {
-    var row = [];
-    for (var colIndex = 0; colIndex < rowsOrColumns; colIndex++) {
-    row.push(new Space(rowIndex, colIndex));
+  createBoard.prototype.isWinner = function() {
+    //boolean true if 3 in a row
   }
-  this.board.push(row);
+
+
+function Game(number) {
+  this.playerX = newPlayer("X");
+  this.playerY = newPlayer("Y");
+  this.board = createBoard(this.number);
+  this.currentPlayer = this.playerX;
+
 }
-  return board;
-}
 
-
-
-// Board.prototype.findSpace = function() {
-//   //?? what would we use this for
-// }
-//
-// Board.prototype.checkIfWinning = function() {
-//
-// }
-//
-// function Game() {
-//   //creates 2 players
-//   //initializes board
-//
-// }
-
-
-
-
-
+  Game.prototype.switchPlayers = function() {
+    if (this.currentPlayer === this.player1) {
+      this.currentPlayer = this.playerY;
+    } else {
+      this.currentPlayer = this.playerX;
+    }
+  }
 
 
 // $(document).ready(function() {
