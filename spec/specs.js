@@ -42,6 +42,11 @@ describe('createBoard', function() {
       var newBoard = new createBoard(9);
       expect(newBoard.findSpace(0,1)).to.eql(new Space(0,1));
    });
+
+   it("returns true when a player wins", function() {
+      var newBoard = new createBoard(9);
+      expect(newBoard.isWinner()).to.equal(true);
+   });
  });
 
  // describe('Game', function() {

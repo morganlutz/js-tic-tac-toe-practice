@@ -29,7 +29,6 @@ function Space(xCoordinate, yCoordinate) {
   }
 
 function createBoard(numberOfSpaces) {
-    debugger;
     this.board = [];
 
     var rowsOrColumns = Math.sqrt(numberOfSpaces);
@@ -49,15 +48,17 @@ function createBoard(numberOfSpaces) {
 
 
   createBoard.prototype.isWinner = function() {
-    if( (board[0][0] === board[0][1] && board[0][1] === board[0][2])//one
-    ||  (board[1][0] === board[1][1] && board[1][1] === board[1][2])//two
-    ||  (board[2][0] === board[2][1] && board[2][1] === board[2][2])//three
-    ||  (board[0][0] === board[1][0] && board[1][0] === board[2][0])//four
-    ||  (board[0][1] === board[1][1] && board[1][1] === board[2][1])//five
-    ||  (board[0][2] === board[1][2] && board[1][2] === board[2][2])//six
-    ||  (board[0][0] === board[1][1] && board[1][1] === board[2][2])//seven
-    ||  (board[0][2] === board[1][1] && board[1][1] === board[2][0])//eight
-    ) {
+    //debugger;
+
+    if( this.findSpace(0, 0).markedBy === this.findSpace(0, 1).markedBy && this.findSpace(0, 1).markedBy === this.findSpace(0, 2).markedBy)//one
+    if( this.findSpace(1, 0).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(1, 2).markedBy)//two
+    if( this.findSpace(2, 0).markedBy === this.findSpace(2, 1).markedBy && this.findSpace(2, 1).markedBy === this.findSpace(2, 2).markedBy)//three
+    if( this.findSpace(0, 0).markedBy === this.findSpace(1, 0).markedBy && this.findSpace(1, 0).markedBy === this.findSpace(2, 0).markedBy)//four
+    if( this.findSpace(0, 1).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 1).markedBy)//five
+    if( this.findSpace(0, 2).markedBy === this.findSpace(1, 2).markedBy && this.findSpace(1, 2).markedBy === this.findSpace(2, 2).markedBy)//six
+    if( this.findSpace(0, 0).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 2).markedBy)//seven
+    if( this.findSpace(0, 2).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 0).markedBy)//eight
+   {
       return true;
     } else {
       return false;
@@ -80,6 +81,7 @@ function Game(number) {
       this.currentPlayer = this.playerX;
     }
   }
+
 
 
 // $(document).ready(function() {
