@@ -49,7 +49,19 @@ function createBoard(numberOfSpaces) {
 
 
   createBoard.prototype.isWinner = function() {
-    //boolean true if 3 in a row
+    if( (board[0][0] === board[0][1] && board[0][1] === board[0][2])//one
+    ||  (board[1][0] === board[1][1] && board[1][1] === board[1][2])//two
+    ||  (board[2][0] === board[2][1] && board[2][1] === board[2][2])//three
+    ||  (board[0][0] === board[1][0] && board[1][0] === board[2][0])//four
+    ||  (board[0][1] === board[1][1] && board[1][1] === board[2][1])//five
+    ||  (board[0][2] === board[1][2] && board[1][2] === board[2][2])//six
+    ||  (board[0][0] === board[1][1] && board[1][1] === board[2][2])//seven
+    ||  (board[0][2] === board[1][1] && board[1][1] === board[2][0])//eight
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 
