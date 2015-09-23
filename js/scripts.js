@@ -1,24 +1,55 @@
-function Player(player) {
-  this.player = player;
+function Player(mark) {
   this.mark = mark;
-};
+}
 
-function Space(xCoordinate,yCoordinate) {
+function Space(xCoordinate, yCoordinate) {
   this.xCoordinate = xCoordinate;
   this.yCoordinate = yCoordinate;
-};
+  this.markedBy = "";
+}
 
-function Board() {
+Space.prototype.checkIfEmpty = function() {
+//debugger;
+  if(this.markedBy === "") {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-};
+Space.prototype.markByPlayer = function(player) {
+  //debugger;
+  if(this.checkIfEmpty()) {
+    this.markedBy = player.mark;
+  } else {
 
-function Game() {
+  }
+}
+
+Space.prototype.getMark = function() {
+  return this.markedBy;
+}
+
+function Board(numberOfSquares) {
+  //takes number of squares and gets square root
+  //uses square root to decide how many spaces in each row
+  //run function that creates the correct number of spaces
+  //assign spaces to html elements???
+}
+
+Board.prototype.findSpace = function() {
+  //?? what would we use this for
+}
+
+Board.prototype.checkIfWinning = function() {
 
 }
 
-Space.prototype.markedBy = function() {
-  //tell if square should be x or o
-};
+function Game() {
+  //creates 2 players
+  //initializes board
+
+}
 
 
 
@@ -26,24 +57,14 @@ Space.prototype.markedBy = function() {
 
 
 
-//play constructor is x or o
-
-//space constructor has ??coordinates and markedby player function
-
-//board constructor has 9 spaces with coordinates, check if 3 in a row are marked by same player, return space by its coordinates (board.find(1,2))
-
-//game constructor creates 2 players, 1 board, move to next turn, track which player has turn, check if game is over or not
-
-$(document).ready(function() {
-  $("form#").submit(function(event) {
-    //var number = parseInt($("input#number").val());
-
-    var result = ();
-
-    $(".answer").text(result);
-
-
-    $("#result").show();
-    event.preventDefault();
-  });
-});
+// $(document).ready(function() {
+//   $("form#").submit(function(event) {
+//     //var number = parseInt($("input#number").val());
+//
+//     $(".answer").text(result);
+//
+//
+//     $("#result").show();
+//     event.preventDefault();
+//   });
+// });
