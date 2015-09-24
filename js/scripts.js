@@ -20,6 +20,10 @@ function Space(xCoordinate, yCoordinate) {
     if(this.checkIfEmpty()) {
       this.markedBy = player.mark;
 
+      var square = document.getElementById(this).getContext("2d");
+      square.font = "270px Arial";
+      square.fillText("x", 90, 145);
+
     } else {
 
     }
@@ -32,12 +36,14 @@ function Space(xCoordinate, yCoordinate) {
 
 // Use this later to draw X and O on the board
 function mark(space) {
-  var square = document.getElementById(space).getContext("2d");
+  var x = space.xCoordinate;
+  var y = space.yCoordinate;
+  var square = document.getElementById(x + "," + y).getContext("2d");
   square.font = "270px Arial";
   square.fillText("x", 90, 145);
 }
 
-function createBoard(numberOfSpaces) {
+function Board(numberOfSpaces) {
     this.board = [];
 
     var rowsOrColumns = Math.sqrt(numberOfSpaces);
@@ -51,12 +57,12 @@ function createBoard(numberOfSpaces) {
   }
 }
 
-  createBoard.prototype.findSpace = function(xCoordinate, yCoordinate) {
+  Board.prototype.findSpace = function(xCoordinate, yCoordinate) {
     return this.board[xCoordinate][yCoordinate];
   }
 
 
-  createBoard.prototype.isWinner = function() {
+  Board.prototype.isWinner = function() {
     if( this.findSpace(0, 0).markedBy === this.findSpace(0, 1).markedBy && this.findSpace(0, 1).markedBy === this.findSpace(0, 2).markedBy)//one
     if( this.findSpace(1, 0).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(1, 2).markedBy)//two
     if( this.findSpace(2, 0).markedBy === this.findSpace(2, 1).markedBy && this.findSpace(2, 1).markedBy === this.findSpace(2, 2).markedBy)//three
@@ -72,11 +78,17 @@ function createBoard(numberOfSpaces) {
     }
   }
 
+  // helper method to identify a particular space
+  Board.prototype.getSpace = function(row, position) {
+    var space = this.board[row][position - 1]
+    return space;
+  }
+
 
 function Game(number) {
   this.playerX = newPlayer("X");
   this.playerY = newPlayer("Y");
-  this.board = createBoard(this.number);
+  this.board = new Board(this.number);
   this.currentPlayer = this.playerX;
 
 }
