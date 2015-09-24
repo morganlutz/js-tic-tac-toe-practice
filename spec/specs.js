@@ -43,9 +43,21 @@ describe('createBoard', function() {
       expect(newBoard.findSpace(0,1)).to.eql(new Space(0,1));
    });
 
-   it("returns true when a player wins", function() {
+   it("initially returns true because all spaces are blanks", function() {
       var newBoard = new createBoard(9);
       expect(newBoard.isWinner()).to.equal(true);
+   });
+
+   it("returns true when a player wins", function() {
+      // var newBoard = new createBoard(9);
+      // var testPlayer = new Player("X");
+      // var testSpace1 = new Space(1,0);
+      // var testSpace2 = new Space(1,1);
+      // var testSpace3 = new Space(15,2);
+      // testSpace1.markByPlayer(testPlayer);
+      // testSpace2.markByPlayer(testPlayer);
+      // testSpace3.markByPlayer(testPlayer);
+      // expect(newBoard.isWinner()).to.equal(true);
    });
  });
 
