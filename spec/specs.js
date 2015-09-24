@@ -17,6 +17,7 @@ describe('Space', function() {
       expect(testSpace.yCoordinate).to.equal(2);
    });
 
+   // test is no longer passing after changing markByPlayer()
    it("lets a player mark a space", function() {
     var testPlayer = new Player("X");
     var testSpace = new Space(1,2);
@@ -26,9 +27,9 @@ describe('Space', function() {
 
 });
 
-describe('createBoard', function() {
+describe('Board', function() {
   it("initializes board", function() {
-    var newBoard = new createBoard(9);
+    var newBoard = new Board(9);
     var expectedBoardArray = [
     [new Space(0,0), new Space(0,1), new Space(0, 2)],
     [new Space(1,0), new Space(1,1), new Space(1, 2)],
@@ -39,26 +40,18 @@ describe('createBoard', function() {
 
 
    it("returns space by coordinates", function() {
-      var newBoard = new createBoard(9);
-      expect(newBoard.findSpace(0,1)).to.eql(new Space(0,1));
+      var newBoard = new Board(9);
+      expect(newBoard.getSpace(0,1)).to.eql(new Space(0,1));
    });
 
    it("initially returns true because all spaces are blanks", function() {
-      var newBoard = new createBoard(9);
+      var newBoard = new Board(9);
       expect(newBoard.isWinner()).to.equal(true);
    });
 
-   it("returns true when a player wins", function() {
-      // var newBoard = new createBoard(9);
-      // var testPlayer = new Player("X");
-      // var testSpace1 = new Space(1,0);
-      // var testSpace2 = new Space(1,1);
-      // var testSpace3 = new Space(15,2);
-      // testSpace1.markByPlayer(testPlayer);
-      // testSpace2.markByPlayer(testPlayer);
-      // testSpace3.markByPlayer(testPlayer);
-      // expect(newBoard.isWinner()).to.equal(true);
-   });
+  //  it("returns true when a player wins", function() {
+   //
+  //  });
  });
 
  // describe('Game', function() {
