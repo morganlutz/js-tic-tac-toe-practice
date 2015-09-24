@@ -1,5 +1,6 @@
 function Player(mark) {
   this.mark = mark;
+  return mark; // do we need to return this?
 }
 
 function Space(xCoordinate, yCoordinate) {
@@ -20,9 +21,11 @@ function Space(xCoordinate, yCoordinate) {
     if(this.checkIfEmpty()) {
       this.markedBy = player.mark;
 
-      var square = document.getElementById(this).getContext("2d");
+      var x = this.xCoordinate;
+      var y = this.yCoordinate;
+      var square = document.getElementById(x + "," + y).getContext("2d");
       square.font = "270px Arial";
-      square.fillText("x", 90, 145);
+      square.fillText(player.mark, 90, 145);
 
     } else {
 
@@ -32,16 +35,6 @@ function Space(xCoordinate, yCoordinate) {
   Space.prototype.getMark = function() {
     return this.markedBy;
   }
-
-
-// Use this later to draw X and O on the board
-function mark(space) {
-  var x = space.xCoordinate;
-  var y = space.yCoordinate;
-  var square = document.getElementById(x + "," + y).getContext("2d");
-  square.font = "270px Arial";
-  square.fillText("x", 90, 145);
-}
 
 function Board(numberOfSpaces) {
     this.board = [];
@@ -57,31 +50,33 @@ function Board(numberOfSpaces) {
   }
 }
 
-  Board.prototype.findSpace = function(xCoordinate, yCoordinate) {
+  Board.prototype.getSpace = function(xCoordinate, yCoordinate) {
     return this.board[xCoordinate][yCoordinate];
+    return space
   }
 
+  // helper method to identify a particular space
+  // board.board[0] shows entire zeroth row
+  // board.board[0][0] shows the zeroth space on zeroth row
+  // Board.prototype.getSpace = function(row, position) {
+  //   var space = this.board[row][position - 1]
+  //   return space;
+  // }
 
   Board.prototype.isWinner = function() {
-    if( this.findSpace(0, 0).markedBy === this.findSpace(0, 1).markedBy && this.findSpace(0, 1).markedBy === this.findSpace(0, 2).markedBy)//one
-    if( this.findSpace(1, 0).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(1, 2).markedBy)//two
-    if( this.findSpace(2, 0).markedBy === this.findSpace(2, 1).markedBy && this.findSpace(2, 1).markedBy === this.findSpace(2, 2).markedBy)//three
-    if( this.findSpace(0, 0).markedBy === this.findSpace(1, 0).markedBy && this.findSpace(1, 0).markedBy === this.findSpace(2, 0).markedBy)//four
-    if( this.findSpace(0, 1).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 1).markedBy)//five
-    if( this.findSpace(0, 2).markedBy === this.findSpace(1, 2).markedBy && this.findSpace(1, 2).markedBy === this.findSpace(2, 2).markedBy)//six
-    if( this.findSpace(0, 0).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 2).markedBy)//seven
-    if( this.findSpace(0, 2).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 0).markedBy)//eight
+    if( this.getSpace(0, 0).markedBy === this.getSpace(0, 1).markedBy && this.getSpace(0, 1).markedBy === this.getSpace(0, 2).markedBy)//one
+    if( this.getSpace(1, 0).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(1, 2).markedBy)//two
+    if( this.getSpace(2, 0).markedBy === this.getSpace(2, 1).markedBy && this.getSpace(2, 1).markedBy === this.getSpace(2, 2).markedBy)//three
+    if( this.getSpace(0, 0).markedBy === this.getSpace(1, 0).markedBy && this.getSpace(1, 0).markedBy === this.getSpace(2, 0).markedBy)//four
+    if( this.getSpace(0, 1).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(2, 1).markedBy)//five
+    if( this.getSpace(0, 2).markedBy === this.getSpace(1, 2).markedBy && this.getSpace(1, 2).markedBy === this.getSpace(2, 2).markedBy)//six
+    if( this.getSpace(0, 0).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(2, 2).markedBy)//seven
+    if( this.getSpace(0, 2).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(2, 0).markedBy)//eight
    {
       return true;
     } else {
       return false;
     }
-  }
-
-  // helper method to identify a particular space
-  Board.prototype.getSpace = function(row, position) {
-    var space = this.board[row][position - 1]
-    return space;
   }
 
 
@@ -103,21 +98,7 @@ function Game(number) {
 
 
 $(document).ready(function() {
-    //spaces in row one:
-    var square1 = document.getElementById("0,0").getContext("2d");
-    var square2 = document.getElementById("0,1").getContext("2d");
-    var square3 = document.getElementById("0,2").getContext("2d");
-
-    //spaces in row two:
-    var square4 = document.getElementById("1,0").getContext("2d");
-    var square5 = document.getElementById("1,1").getContext("2d");
-    var square6 = document.getElementById("1,2").getContext("2d");
-
-    //spaces in row three:
-    var square7 = document.getElementById("2,0").getContext("2d");
-    var square8 = document.getElementById("2,1").getContext("2d");
-    var square9 = document.getElementById("2,2").getContext("2d");
-
+    var board = new Board(9)
 
     $(".winner").text(result);
     $("#result").show();
