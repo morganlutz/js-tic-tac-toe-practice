@@ -1,5 +1,6 @@
 function Player(mark) {
   this.mark = mark;
+  return mark; // do we need to return this?
 }
 
 function Space(xCoordinate, yCoordinate) {
@@ -19,6 +20,11 @@ function Space(xCoordinate, yCoordinate) {
   Space.prototype.markByPlayer = function(player) {
     if(this.checkIfEmpty()) {
       this.markedBy = player.mark;
+      var x = this.xCoordinate;
+      var y = this.yCoordinate;
+      var square = document.getElementById(x + "," + y).getContext("2d");
+      square.font = "270px Arial";
+      square.fillText(player.mark, 90, 145);
     } else {
 
     }
@@ -28,7 +34,7 @@ function Space(xCoordinate, yCoordinate) {
     return this.markedBy;
   }
 
-function createBoard(numberOfSpaces) {
+function Board(numberOfSpaces) {
     this.board = [];
 
     var rowsOrColumns = Math.sqrt(numberOfSpaces);
@@ -42,22 +48,20 @@ function createBoard(numberOfSpaces) {
   }
 }
 
-  createBoard.prototype.findSpace = function(xCoordinate, yCoordinate) {
+  Board.prototype.getSpace = function(xCoordinate, yCoordinate) {
     return this.board[xCoordinate][yCoordinate];
+    return space
   }
 
-
-  createBoard.prototype.isWinner = function() {
-    //debugger;
-
-    if( this.findSpace(0, 0).markedBy === this.findSpace(0, 1).markedBy && this.findSpace(0, 1).markedBy === this.findSpace(0, 2).markedBy)//one
-    if( this.findSpace(1, 0).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(1, 2).markedBy)//two
-    if( this.findSpace(2, 0).markedBy === this.findSpace(2, 1).markedBy && this.findSpace(2, 1).markedBy === this.findSpace(2, 2).markedBy)//three
-    if( this.findSpace(0, 0).markedBy === this.findSpace(1, 0).markedBy && this.findSpace(1, 0).markedBy === this.findSpace(2, 0).markedBy)//four
-    if( this.findSpace(0, 1).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 1).markedBy)//five
-    if( this.findSpace(0, 2).markedBy === this.findSpace(1, 2).markedBy && this.findSpace(1, 2).markedBy === this.findSpace(2, 2).markedBy)//six
-    if( this.findSpace(0, 0).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 2).markedBy)//seven
-    if( this.findSpace(0, 2).markedBy === this.findSpace(1, 1).markedBy && this.findSpace(1, 1).markedBy === this.findSpace(2, 0).markedBy)//eight
+  Board.prototype.isWinner = function() {
+    if( this.getSpace(0, 0).markedBy === this.getSpace(0, 1).markedBy && this.getSpace(0, 1).markedBy === this.getSpace(0, 2).markedBy)//one
+    if( this.getSpace(1, 0).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(1, 2).markedBy)//two
+    if( this.getSpace(2, 0).markedBy === this.getSpace(2, 1).markedBy && this.getSpace(2, 1).markedBy === this.getSpace(2, 2).markedBy)//three
+    if( this.getSpace(0, 0).markedBy === this.getSpace(1, 0).markedBy && this.getSpace(1, 0).markedBy === this.getSpace(2, 0).markedBy)//four
+    if( this.getSpace(0, 1).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(2, 1).markedBy)//five
+    if( this.getSpace(0, 2).markedBy === this.getSpace(1, 2).markedBy && this.getSpace(1, 2).markedBy === this.getSpace(2, 2).markedBy)//six
+    if( this.getSpace(0, 0).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(2, 2).markedBy)//seven
+    if( this.getSpace(0, 2).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(2, 0).markedBy)//eight
    {
       return true;
     } else {
@@ -67,31 +71,27 @@ function createBoard(numberOfSpaces) {
 
 
 function Game(number) {
-  this.playerX = newPlayer("X");
-  this.playerY = newPlayer("Y");
-  this.board = createBoard(this.number);
-  this.currentPlayer = this.playerX;
+  this.player1 = newPlayer("X");
+  this.player2 = newPlayer("Y");
+  this.board = new Board(this.number);
+  this.currentPlayer = this.player1;
 
 }
 
   Game.prototype.switchPlayers = function() {
     if (this.currentPlayer === this.player1) {
-      this.currentPlayer = this.playerY;
+      currentPlayer = this.player2;
     } else {
-      this.currentPlayer = this.playerX;
+      currentPlayer = this.player1;
     }
   }
 
 
+$(document).ready(function() {
+    var board = new Board(9);
+    Game();
 
-// $(document).ready(function() {
-//   $("form#").submit(function(event) {
-//     //var number = parseInt($("input#number").val());
-//
-//     $(".answer").text(result);
-//
-//
-//     $("#result").show();
-//     event.preventDefault();
-//   });
-// });
+    $(".winner").text(result);
+    $("#result").show();
+    event.preventDefault();
+});
