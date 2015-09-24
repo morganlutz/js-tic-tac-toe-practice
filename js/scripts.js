@@ -20,13 +20,11 @@ function Space(xCoordinate, yCoordinate) {
   Space.prototype.markByPlayer = function(player) {
     if(this.checkIfEmpty()) {
       this.markedBy = player.mark;
-
       var x = this.xCoordinate;
       var y = this.yCoordinate;
       var square = document.getElementById(x + "," + y).getContext("2d");
       square.font = "270px Arial";
       square.fillText(player.mark, 90, 145);
-
     } else {
 
     }
@@ -55,14 +53,6 @@ function Board(numberOfSpaces) {
     return space
   }
 
-  // helper method to identify a particular space
-  // board.board[0] shows entire zeroth row
-  // board.board[0][0] shows the zeroth space on zeroth row
-  // Board.prototype.getSpace = function(row, position) {
-  //   var space = this.board[row][position - 1]
-  //   return space;
-  // }
-
   Board.prototype.isWinner = function() {
     if( this.getSpace(0, 0).markedBy === this.getSpace(0, 1).markedBy && this.getSpace(0, 1).markedBy === this.getSpace(0, 2).markedBy)//one
     if( this.getSpace(1, 0).markedBy === this.getSpace(1, 1).markedBy && this.getSpace(1, 1).markedBy === this.getSpace(1, 2).markedBy)//two
@@ -80,25 +70,27 @@ function Board(numberOfSpaces) {
   }
 
 
-function Game(number) {
-  this.playerX = newPlayer("X");
-  this.playerY = newPlayer("Y");
-  this.board = new Board(this.number);
-  this.currentPlayer = this.playerX;
-
+function Game() {
+  this.player1 = new Player("X");
+  this.player2 = new Player("O");
+  this.board = new Board(9);
+  this.currentPlayer = this.player1;
 }
 
+  // switching players does not work
   Game.prototype.switchPlayers = function() {
     if (this.currentPlayer === this.player1) {
-      this.currentPlayer = this.playerY;
+      currentPlayer = this.player2;
     } else {
-      this.currentPlayer = this.playerX;
+      currentPlayer = this.player1;
     }
   }
 
-
 $(document).ready(function() {
-    var board = new Board(9)
+    var board = new Board(9);
+    Game();
+
+    
 
     $(".winner").text(result);
     $("#result").show();
