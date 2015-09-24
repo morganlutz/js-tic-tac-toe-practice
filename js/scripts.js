@@ -23,7 +23,7 @@ function Space(xCoordinate, yCoordinate) {
       var x = this.xCoordinate;
       var y = this.yCoordinate;
       var square = document.getElementById(x + "," + y).getContext("2d");
-      square.font = "270px Arial";
+      square.font = "190px Arial";
       square.fillText(player.mark, 90, 145);
     } else {
 
@@ -71,8 +71,8 @@ function Board(numberOfSpaces) {
 
 
 function Game(number) {
-  this.player1 = newPlayer("X");
-  this.player2 = newPlayer("Y");
+  this.player1 = new Player("X");
+  this.player2 = new Player("O");
   this.board = new Board(this.number);
   this.currentPlayer = this.player1;
 
