@@ -70,14 +70,14 @@ function Board(numberOfSpaces) {
   }
 
 
-function Game() {
-  this.player1 = new Player("X");
-  this.player2 = new Player("O");
-  this.board = new Board(9);
+function Game(number) {
+  this.player1 = newPlayer("X");
+  this.player2 = newPlayer("Y");
+  this.board = new Board(this.number);
   this.currentPlayer = this.player1;
+
 }
 
-  // switching players does not work
   Game.prototype.switchPlayers = function() {
     if (this.currentPlayer === this.player1) {
       currentPlayer = this.player2;
@@ -86,11 +86,10 @@ function Game() {
     }
   }
 
+
 $(document).ready(function() {
     var board = new Board(9);
     Game();
-
-    
 
     $(".winner").text(result);
     $("#result").show();
